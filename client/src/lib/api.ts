@@ -1,6 +1,6 @@
 import type { FieldError, PredictionResponse, StudentData } from "./types";
 
-export const API_BASE = import.meta.env.VITE_API_BASE_URL || "http://localhost:8000";
+export const API_BASE = import.meta.env.VITE_API_BASE_URL ;
 
 export class ApiError extends Error {
   status?: number;
@@ -89,7 +89,7 @@ export async function predictScore(payload: StudentData): Promise<PredictionResp
     });
   } catch {
     throw new ApiError(
-      `Cannot reach the prediction server at ${API_BASE}. Start FastAPI with “uvicorn main:app --port 8000 --reload” and check CORS if the server is running.`
+       "Unable to connect to the prediction service. Please try again in a moment."
     );
   }
 
