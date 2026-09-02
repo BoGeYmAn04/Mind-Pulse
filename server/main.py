@@ -6,7 +6,9 @@ from  pydantic import BaseModel,Field
 import pandas as pd
 from typing import Literal
 from pathlib import Path
+from dotenv import load_dotenv
 
+load_dotenv()
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 MODEL_PATH = BASE_DIR / "Model" / "Mental_Health_Model.pkl"
