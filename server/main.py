@@ -1,12 +1,25 @@
 import joblib
 from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
 from  pydantic import BaseModel,Field
 import pandas as pd
 from typing import Literal
+from pathlib import Path
 
-model = joblib.load(r'Model\Mental_Health_Model.pkl')
+BASE_DIR = Path(__file__).resolve().parent.parent
+
+MODEL_PATH = BASE_DIR / "Model" / "Mental_Health_Model.pkl"
+
+model = joblib.load(MODEL_PATH)
 top_countries = ['Other','India','USA','Canada','Australia','UK','Germany','Mexico','Turkey','France']
 app = FastAPI()
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 class StudentData(BaseModel):
     Age                     : int = Field(..., ge=10, le=100)
